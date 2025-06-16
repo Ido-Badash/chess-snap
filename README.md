@@ -88,12 +88,50 @@ MIT License (see [LICENSE](LICENSE) for details)
 
 ## Roadmap
 
-- [ ] Image-to-board integration
-- [ ] LAN multiplayer
-- [ ] Theming system
-- [ ] Game/match database
-- [ ] AI opponent
-- [ ] Enhanced web support
+### Phase 1: Core Game (MVP)
+- [ ] **Flutter Foundation**
+  - [ ] Set up multi-platform project structure (mobile + web)
+  - [ ] Implement basic chess board UI with `flutter_chess` or custom renderer
+  - [ ] Add theme system (light/dark/classic/modern)
+  
+- [ ] **Image Integration**
+  - [ ] Connect to partner's image-to-board API (HTTP/RPC)
+  - [ ] Build camera capture screen (`camera` package)
+  - [ ] Add photo cropping/confirmation flow
+
+- [ ] **Basic Gameplay**
+  - [ ] Implement move validation
+  - [ ] Add undo/redo functionality
+  - [ ] Local game state persistence (`hive`)
+
+### Phase 2: Multiplayer
+- [ ] **LAN Play**
+  - [ ] Socket-based networking (`web_socket_channel`)
+  - [ ] Device discovery on local network (`mdns`)
+  
+- [ ] **Invite System**
+  - [ ] Generate shareable links/codes
+  - [ ] Join via QR code (`qr_code_scanner`)
+
+### Phase 3: Polish & Extras
+- [ ] **UI/UX**
+  - [ ] Animations for piece moves
+  - [ ] Sound effects
+  - [ ] Tutorial/onboarding flow
+
+- [ ] **Advanced Features**
+  - [ ] Game history/replay
+  - [ ] PGN export/import
+  - [ ] Simple AI bot (optional)
+
+### Phase 4: Deployment
+- [ ] **Web**
+  - [ ] Optimize for Chrome/Firefox
+  - [ ] Deploy to Firebase Hosting
+  
+- [ ] **Mobile**
+  - [ ] Release TestFlight/Play Store Beta
+  - [ ] App Store submission
 
 ---
 

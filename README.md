@@ -91,8 +91,8 @@ MIT License (see [LICENSE](LICENSE) for details)
 ### Phase 1: Core Game (MVP)
 - [ ] **Flutter Foundation**
   - [ ] Set up multi-platform project structure (mobile + web)
-  - [ ] Implement basic chess board UI with `flutter_chess` or custom renderer
   - [ ] Add theme system (light/dark/classic/modern)
+  - [ ] Implement basic chess board UI with `flutter_chess` or custom renderer
   
 - [ ] **Image Integration**
   - [ ] Connect to partner's image-to-board API (HTTP/RPC)

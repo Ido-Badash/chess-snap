@@ -101,5 +101,6 @@ MIT License (see [LICENSE](LICENSE) for details)
 
 - Flutter
 - Open source chess libraries and databases
-- [Your AI partner’s name/project if desired]
+- UI and DB by Ido Badash
+- Photo to board by David Ortish
 

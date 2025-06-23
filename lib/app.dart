@@ -1,3 +1,5 @@
+import "package:chess_snap/features/settings/presentation/view.dart";
+import 'package:chess_snap/features/about_n_help/presentation/view.dart';
 import "package:flutter/material.dart";
 
 class ChessSnap extends StatefulWidget {
@@ -9,6 +11,7 @@ class ChessSnap extends StatefulWidget {
 
 class _ChessSnapState extends State<ChessSnap> {
   bool _menuOpen = false; // State variable to track menu expansion
+  Widget? currentBody;
 
   @override
   Widget build(BuildContext context) {
@@ -29,11 +32,28 @@ class _ChessSnapState extends State<ChessSnap> {
       ),
       body: Column(
         children: [
-          if (_menuOpen) buildAppMenu(), // Show menu if open
-          Flexible(flex: 1, child: buildAppDescription()),
-          Flexible(flex: 1, child: buildCenteredButtons()),
+          Expanded(
+            child: Stack(
+              children: [
+                currentBody ??
+                    buildAppHomeView(), // Render currentBody or home view
+                if (_menuOpen)
+                  buildAppMenu(), // Overlay menu on top of currentBody
+              ],
+            ),
+          ),
         ],
       ),
+    );
+  }
+
+  // App home view builder
+  Widget buildAppHomeView() {
+    return Column(
+      children: [
+        Flexible(flex: 1, child: buildAppDescription()),
+        Flexible(flex: 1, child: buildCenteredButtons()),
+      ],
     );
   }
 
@@ -54,7 +74,6 @@ class _ChessSnapState extends State<ChessSnap> {
   // App menu builder
   Widget buildAppMenu() {
     return Container(
-      decoration: const BoxDecoration(border: Border(bottom: BorderSide())),
       margin: const EdgeInsets.symmetric(vertical: 8.0),
       child: Column(
         children: [
@@ -68,6 +87,7 @@ class _ChessSnapState extends State<ChessSnap> {
             title: const Text("About & Help"),
             onTap: goToAboutAndHelp,
           ),
+          Container(width: double.infinity, height: 1, color: Colors.black.withAlpha(200),)
         ],
       ),
     );
@@ -142,13 +162,14 @@ class _ChessSnapState extends State<ChessSnap> {
 
   // Navigate to settings function
   void goToSettings() {
-    // TODO: Implement the settings navigation logic
+    // Example navigation to a SettingsPage (replace with your actual settings page)
+    _goTo(SettingsView());
     debugPrint("Navigating to settings...");
   }
 
   // Navigate to about and help function
   void goToAboutAndHelp() {
-    // TODO: Implement the about and help navigation logic
+    _goTo(AboutNHelpView());
     debugPrint("Navigating to about and help...");
   }
 
@@ -174,5 +195,11 @@ class _ChessSnapState extends State<ChessSnap> {
   void goToFromScratch() {
     // TODO: Implement the menu opening logic
     debugPrint("Navigating to gameplay...");
+  }
+
+  void _goTo(Widget widget) {
+    setState(() {
+      currentBody = widget;
+    });
   }
 }

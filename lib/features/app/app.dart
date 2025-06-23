@@ -84,11 +84,6 @@ class _ChessSnapState extends State<ChessSnap> {
           ifNotOnViewThenTile("home", buildHomeTile()),
           ifNotOnViewThenTile("settings", buildSettingsTile()),
           ifNotOnViewThenTile("about & help", buildAboutNHelpTile()),
-          Container(
-            width: double.infinity,
-            height: 1,
-            color: Colors.black.withAlpha(200),
-          ),
         ],
       ),
     );

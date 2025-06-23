@@ -1,20 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:chess_snap/features/game/presentation/view.dart';
 
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
   const HomeView({super.key});
+  @override
+  State<HomeView> createState() => _HomeViewState();
+}
 
+class _HomeViewState extends State<HomeView> {
+  Widget? currentBody;
+
+  final Map views = {"scrach": ChessGameView()};
+
+  // Accept currentBody in the constructor
   @override
   Widget build(BuildContext context) {
-    // Get screen dimensions
+    return currentBody ?? buildAppHome();
+  }
+
+  Widget buildAppHome() {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
-
     return SingleChildScrollView(
       child: Column(
         children: [
           buildAppDescription(screenWidth, screenHeight),
           const SizedBox(height: 20.0), // Add spacing between sections
-          buildCenteredButtons(screenWidth),
+          buildCenteredButtons(screenWidth), // Use currentBody if provided
         ],
       ),
     );
@@ -133,6 +145,13 @@ class HomeView extends StatelessWidget {
 
   // Navigate to gameplay function
   void goToFromScratch() {
+    _goTo("scrach");
     debugPrint("Navigating to gameplay...");
+  }
+
+  void _goTo(String view) {
+    setState(() {
+      currentBody = views[view];
+    });
   }
 }

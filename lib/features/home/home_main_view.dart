@@ -1,24 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:chess_snap/features/game/presentation/view.dart';
 
-class HomeView extends StatefulWidget {
-  const HomeView({super.key});
+class HomeMainView extends StatelessWidget {
+  final void Function()? goToTakeAPicture;
+  final void Function()? goToImageFromGallery;
+  final void Function()? goToFromScratch;
 
-  @override
-  State<HomeView> createState() => _HomeViewState();
-}
-
-class _HomeViewState extends State<HomeView> {
-  Widget? currentBody;
-
-  final Map views = {"scrach": ChessGameView()};
+  const HomeMainView({
+    super.key,
+    this.goToTakeAPicture,
+    this.goToImageFromGallery,
+    this.goToFromScratch,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return currentBody ?? buildAppHome();
-  }
-
-  Widget buildAppHome() {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
     return SingleChildScrollView(
@@ -131,27 +126,5 @@ class _HomeViewState extends State<HomeView> {
         ),
       ),
     );
-  }
-
-  // Navigate to take a picture function
-  void goToTakeAPicture() {
-    debugPrint("Navigating to take a picture...");
-  }
-
-  // Navigate to image from gallery function
-  void goToImageFromGallery() {
-    debugPrint("Navigating to image from gallery...");
-  }
-
-  // Navigate to gameplay function
-  void goToFromScratch() {
-    _goTo("scrach");
-    debugPrint("Navigating to gameplay...");
-  }
-
-  void _goTo(String view) {
-    setState(() {
-      currentBody = views[view];
-    });
   }
 }

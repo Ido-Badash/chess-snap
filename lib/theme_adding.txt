@@ -1,3 +1,0 @@
-dividerColor
-colorScheme
-textTheme

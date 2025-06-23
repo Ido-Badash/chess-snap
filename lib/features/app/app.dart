@@ -21,6 +21,12 @@ class _ChessSnapState extends State<ChessSnap> {
   };
 
   @override
+  void initState() {
+    super.initState();
+    currentBody = views["home"];
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -50,25 +56,21 @@ class _ChessSnapState extends State<ChessSnap> {
           ),
         ),
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: Stack(
-              children: [
-                currentBody ?? views["home"], // Render currentBody or home view
-                if (_menuOpen)
-                  Positioned.fill(
-                    child: Container(
-                      color: Colors.white.withAlpha(
-                        220,
-                      ), // Optional background for menu
-                      child: buildAppMenu(), // Menu on top
-                    ),
-                  ),
-              ],
-            ),
-          ),
-        ],
+      body: Center(
+        child: Stack(
+          children: [
+            currentBody ?? views["home"], // Render currentBody or home view
+            if (_menuOpen)
+              Positioned.fill(
+                child: Container(
+                  color: Colors.white.withAlpha(
+                    220,
+                  ), // Optional background for menu
+                  child: buildAppMenu(), // Menu on top
+                ),
+              ),
+          ],
+        ),
       ),
     );
   }

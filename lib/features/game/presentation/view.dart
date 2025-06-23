@@ -14,9 +14,7 @@ class _ChessGameViewState extends State<ChessGameView> {
   @override
   void initState() {
     super.initState();
-    _controller.loadFen(
-      "4Q3/4Q3/4Q3/4Q3/8/8/6k1/4K3 w - - 0 1"
-    );
+    _controller.loadFen("4Q3/4Q3/4Q3/4Q3/8/8/6k1/4K3 w - - 0 1");
   }
 
   @override
@@ -27,12 +25,15 @@ class _ChessGameViewState extends State<ChessGameView> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: ChessBoard(
-        controller: _controller,
-        boardColor: BoardColor.brown,
-        boardOrientation: PlayerColor.white,
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        ChessBoard(
+          controller: _controller,
+          boardColor: BoardColor.brown,
+          boardOrientation: PlayerColor.white,
+        ),
+      ],
     );
   }
 }

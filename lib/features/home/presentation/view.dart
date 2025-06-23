@@ -3,6 +3,7 @@ import 'package:chess_snap/features/game/presentation/view.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
+
   @override
   State<HomeView> createState() => _HomeViewState();
 }
@@ -12,7 +13,6 @@ class _HomeViewState extends State<HomeView> {
 
   final Map views = {"scrach": ChessGameView()};
 
-  // Accept currentBody in the constructor
   @override
   Widget build(BuildContext context) {
     return currentBody ?? buildAppHome();
@@ -25,8 +25,8 @@ class _HomeViewState extends State<HomeView> {
       child: Column(
         children: [
           buildAppDescription(screenWidth, screenHeight),
-          const SizedBox(height: 20.0), // Add spacing between sections
-          buildCenteredButtons(screenWidth), // Use currentBody if provided
+          const SizedBox(height: 20.0),
+          buildCenteredButtons(screenWidth),
         ],
       ),
     );
@@ -35,7 +35,7 @@ class _HomeViewState extends State<HomeView> {
   // App description builder
   Widget buildAppDescription(double screenWidth, double screenHeight) {
     return Padding(
-      padding: EdgeInsets.all(screenWidth * 0.05), // Responsive padding
+      padding: EdgeInsets.all(screenWidth * 0.05),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -44,18 +44,18 @@ class _HomeViewState extends State<HomeView> {
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
           ),
-          const SizedBox(height: 10.0), // Add spacing between text
+          const SizedBox(height: 10.0),
           const Text(
             "Capture any chessboard, anywhere, and play instantly!\n"
             "Revolutionize how you practice and enjoy chess!",
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 14),
           ),
-          const SizedBox(height: 20.0), // Add spacing before image
+          const SizedBox(height: 20.0),
           Image.asset(
             "assets/images/home_pieces_bg.png",
-            width: screenWidth * 0.8, // Responsive image width
-            height: screenHeight * 0.3, // Responsive image height
+            width: screenWidth * 0.8,
+            height: screenHeight * 0.3,
             fit: BoxFit.contain,
           ),
         ],
@@ -79,7 +79,7 @@ class _HomeViewState extends State<HomeView> {
   // Take picture button builder
   Widget buildTakePictureButton(double screenWidth) {
     return SizedBox(
-      width: screenWidth * 0.6, // Responsive button width
+      width: screenWidth * 0.6,
       height: 50,
       child: ElevatedButton(
         onPressed: goToTakeAPicture,
@@ -98,7 +98,7 @@ class _HomeViewState extends State<HomeView> {
   // Image from gallery button builder
   Widget buildImageFromGalleryButton(double screenWidth) {
     return SizedBox(
-      width: screenWidth * 0.7, // Responsive button width
+      width: screenWidth * 0.7,
       height: 50,
       child: ElevatedButton(
         onPressed: goToImageFromGallery,
@@ -117,7 +117,7 @@ class _HomeViewState extends State<HomeView> {
   // From scratch button builder
   Widget buildFromScratchButton(double screenWidth) {
     return SizedBox(
-      width: screenWidth * 0.7, // Responsive button width
+      width: screenWidth * 0.7,
       height: 50,
       child: ElevatedButton(
         onPressed: goToFromScratch,

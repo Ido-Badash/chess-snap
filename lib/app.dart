@@ -86,6 +86,7 @@ class _ChessSnapState extends State<ChessSnap> {
     );
   }
 
+  // Take picture button builder
   Widget buildTakePictureButton() {
     return SizedBox(
       width: 220,
@@ -103,6 +104,7 @@ class _ChessSnapState extends State<ChessSnap> {
     );
   }
 
+  // Image from gallery button builder
   Widget buildImageFromGalleryButton() {
     return SizedBox(
       width: 220,
@@ -120,6 +122,7 @@ class _ChessSnapState extends State<ChessSnap> {
     );
   }
 
+  // From scrach button builder
   Widget buildFromScratchButton() {
     return SizedBox(
       width: 220,

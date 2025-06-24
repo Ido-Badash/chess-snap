@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:chess_snap/features/home/home_main_view.dart';
 import 'package:flutter/material.dart';
 import 'package:chess_snap/features/from_gallery/from_gallery_view.dart';
 import 'package:chess_snap/features/game/game_view.dart';
@@ -21,37 +22,27 @@ class _HomeViewState extends State<HomeView> {
       children: [
         // Main home view with buttons
         Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ElevatedButton(
-                onPressed: () {
-                  setState(() {
-                    overlayView = TakeAPicView(onExit: clearOverlay);
-                  });
-                },
-                child: const Text("Take a Picture"),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  setState(() {
-                    overlayView = FromGalleryView(onExit: clearOverlay);
-                  });
-                },
-                child: const Text("Image from Gallery"),
-              ),
-              ElevatedButton(
-                onPressed: () => goToScrach(),
-                child: const Text("From Scratch"),
-              ),
-            ],
+          child: HomeMainView(
+            goToTakeAPicture: () {
+              setState(() {
+                overlayView = TakeAPicView(onExit: clearOverlay);
+              });
+            },
+
+            goToImageFromGallery: () {
+              setState(() {
+                overlayView = FromGalleryView(onExit: clearOverlay);
+              });
+            },
+
+            goToFromScratch: () => goToScrach(),
           ),
         ),
         // Overlay view (if any)
         if (overlayView != null)
           Positioned.fill(
             child: Container(
-              color: Colors.white.withAlpha(227), // Semi-transparent background
+              color: Colors.white, // Semi-transparent background
               child: overlayView,
             ),
           ),

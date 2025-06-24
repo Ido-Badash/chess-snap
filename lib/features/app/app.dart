@@ -11,20 +11,7 @@ class ChessSnap extends StatefulWidget {
 }
 
 class _ChessSnapState extends State<ChessSnap> {
-  bool _menuOpen = false; // State variable to track menu expansion
-  Widget? currentBody;
-
-  final Map views = {
-    "home": HomeView(),
-    "settings": SettingsView(),
-    "about & help": AboutNHelpView(),
-  };
-
-  @override
-  void initState() {
-    super.initState();
-    currentBody = views["home"];
-  }
+  Widget currentBody = const HomeView(); // Default body is HomeView
 
   @override
   Widget build(BuildContext context) {
@@ -32,9 +19,7 @@ class _ChessSnapState extends State<ChessSnap> {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
-            setState(() {
-              toggleMenuState();
-            });
+            showAppMenu(context); // Show menu as a modal
           },
           icon: const Icon(Icons.menu),
         ),
@@ -42,115 +27,85 @@ class _ChessSnapState extends State<ChessSnap> {
           alignment: Alignment.centerRight,
           child: TextButton(
             onPressed: () {
-              _goTo(views["home"]);
+              setState(() {
+                currentBody = const HomeView(); // Reset to HomeView
+              });
             },
             style: ButtonStyle(
-              overlayColor: WidgetStateProperty.all(
-                Colors.transparent,
-              ), // Remove hover color
-              textStyle: WidgetStateProperty.all(
+              overlayColor: MaterialStateProperty.all(Colors.transparent),
+              textStyle: MaterialStateProperty.all(
                 const TextStyle(fontSize: 24),
-              ), // Bigger text
+              ),
             ),
             child: const Text("ChessSnap"),
           ),
         ),
       ),
-      body: Center(
-        child: Stack(
+      body: currentBody, // Dynamically update the body
+    );
+  }
+
+  void showAppMenu(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
-            currentBody ?? views["home"], // Render currentBody or home view
-            if (_menuOpen)
-              Positioned.fill(
-                child: Container(
-                  color: Colors.white.withAlpha(
-                    220,
-                  ), // Optional background for menu
-                  child: buildAppMenu(), // Menu on top
-                ),
+            if (currentBody.runtimeType != HomeView)
+              buildMenuTile(
+                context,
+                icon: Icons.home,
+                title: "Home",
+                onTap: () {
+                  setState(() {
+                    currentBody = const HomeView(); // Change body to HomeView
+                  });
+                },
+              ),
+            if (currentBody.runtimeType != SettingsView)
+              buildMenuTile(
+                context,
+                icon: Icons.settings,
+                title: "Settings",
+                onTap: () {
+                  setState(() {
+                    currentBody =
+                        const SettingsView(); // Change body to SettingsView
+                  });
+                },
+              ),
+            if (currentBody.runtimeType != AboutNHelpView)
+              buildMenuTile(
+                context,
+                icon: Icons.help_outline,
+                title: "About & Help",
+                onTap: () {
+                  setState(() {
+                    currentBody =
+                        const AboutNHelpView(); // Change body to About & Help
+                  });
+                },
               ),
           ],
-        ),
-      ),
+        );
+      },
     );
   }
 
-  // App menu builder
-  Widget buildAppMenu() {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 8.0),
-      child: Column(
-        children: [
-          ifNotOnViewThenTile("home", buildHomeTile()),
-          ifNotOnViewThenTile("settings", buildSettingsTile()),
-          ifNotOnViewThenTile("about & help", buildAboutNHelpTile()),
-        ],
-      ),
-    );
-  }
-
-  // if not on view
-  Widget ifNotOnViewThenTile(String view, Widget tile) {
-    if (currentBody != views[view]) {
-      return tile;
-    }
-    return const SizedBox.shrink();
-  }
-
-  // TILES
-  Widget buildHomeTile() {
+  Widget buildMenuTile(
+    BuildContext context, {
+    required IconData icon,
+    required String title,
+    required VoidCallback onTap,
+  }) {
     return ListTile(
-      leading: const Icon(Icons.home),
-      title: const Text("Home"),
-      onTap: () => goToHome(),
+      leading: Icon(icon),
+      title: Text(title),
+      onTap: () {
+        Navigator.pop(context); // Close the menu
+        onTap(); // Update the body
+      },
     );
-  }
-
-  Widget buildSettingsTile() {
-    return ListTile(
-      leading: const Icon(Icons.settings),
-      title: const Text("Settings"),
-      onTap: goToSettings,
-    );
-  }
-
-  Widget buildAboutNHelpTile() {
-    return ListTile(
-      leading: const Icon(Icons.help_outline),
-      title: const Text("About & Help"),
-      onTap: goToAboutAndHelp,
-    );
-  }
-
-  // Toggle menu state
-  void toggleMenuState() {
-    _menuOpen = !_menuOpen;
-  }
-
-  // Navigate to settings function
-  void goToHome() {
-    // Example navigation to a SettingsPage (replace with your actual settings page)
-    _goTo(views["home"]);
-    debugPrint("Navigating to home...");
-  }
-
-  // Navigate to settings function
-  void goToSettings() {
-    // Example navigation to a SettingsPage (replace with your actual settings page)
-    _goTo(views["settings"]);
-    debugPrint("Navigating to settings...");
-  }
-
-  // Navigate to about and help function
-  void goToAboutAndHelp() {
-    _goTo(views["about & help"]);
-    debugPrint("Navigating to about and help...");
-  }
-
-  void _goTo(Widget widget) {
-    setState(() {
-      _menuOpen = false;
-      currentBody = widget;
-    });
   }
 }

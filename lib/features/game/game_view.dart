@@ -1,6 +1,6 @@
 import 'dart:io'; // For file operations
 import 'package:flutter/material.dart';
-import 'package:flutter_chess_board/flutter_chess_board.dart';
+import 'package:chess_snap/features/game/chess_board.dart';
 
 class GameView extends StatefulWidget {
   final String? fen;
@@ -13,7 +13,6 @@ class GameView extends StatefulWidget {
 }
 
 class _GameViewState extends State<GameView> {
-  final ChessBoardController _controller = ChessBoardController();
   static const String defaultFen =
       "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
   List<String> gameHistory = [];
@@ -22,27 +21,15 @@ class _GameViewState extends State<GameView> {
   @override
   void initState() {
     super.initState();
-    _controller.loadFen(widget.fen ?? defaultFen);
-
-    // Init gameHistory
     _initializeHistory();
-
-    // Add listener to track moves and save history
-    _controller.addListener(() {
-      saveFenToHistory();
-    });
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
   }
 
   Future<void> _initializeHistory() async {
     final history = await getHistoryFromFile(dbPath);
     if (history != null) {
-      gameHistory.addAll(history);
+      setState(() {
+        gameHistory.addAll(history);
+      });
     }
     saveHistoryToFile(dbPath);
   }
@@ -59,17 +46,6 @@ class _GameViewState extends State<GameView> {
     }
   }
 
-  void saveFenToHistory() {
-    // Only save if its a legal move
-    if (_controller.game.history.isNotEmpty) {
-      final fen = _controller.getFen();
-      if (gameHistory.isEmpty || gameHistory.last != fen) {
-        gameHistory.add(fen);
-        saveHistoryToFile(dbPath);
-      }
-    }
-  }
-
   Future<void> saveHistoryToFile(String path) async {
     try {
       final file = File(path);
@@ -81,10 +57,9 @@ class _GameViewState extends State<GameView> {
   }
 
   void resetGame() {
-    // Reset the board and save the reset state
-    _controller.resetBoard();
-    gameHistory = [];
-    gameHistory.add(defaultFen);
+    setState(() {
+      gameHistory = [defaultFen];
+    });
     saveHistoryToFile(dbPath);
   }
 
@@ -97,15 +72,11 @@ class _GameViewState extends State<GameView> {
         Padding(
           padding: const EdgeInsets.only(left: 8.0),
           child: IconButton(
-            icon: Icon(Icons.arrow_back),
+            icon: const Icon(Icons.arrow_back),
             onPressed: widget.onExit ?? () => Navigator.of(context).pop(),
           ),
         ),
-        ChessBoard(
-          controller: _controller,
-          boardColor: BoardColor.brown,
-          boardOrientation: PlayerColor.white,
-        ),
+        Expanded(child: GameChessBoard(fen: widget.fen ?? defaultFen)),
         buildLowerWidgets(),
       ],
     );
@@ -120,7 +91,8 @@ class _GameViewState extends State<GameView> {
             IconButton(
               icon: const Icon(Icons.undo),
               onPressed: () {
-                _controller.undoMove();
+                // Undo functionality can be implemented in GameChessBoard
+                debugPrint("Undo move triggered");
               },
             ),
             const Text("Undo"),

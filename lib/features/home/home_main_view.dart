@@ -1,16 +1,10 @@
 import 'package:flutter/material.dart';
 
 class HomeMainView extends StatelessWidget {
-  final void Function()? goToTakeAPicture;
-  final void Function()? goToImageFromGallery;
+  final void Function()? goToFromPicture;
   final void Function()? goToFromScratch;
 
-  const HomeMainView({
-    super.key,
-    this.goToTakeAPicture,
-    this.goToImageFromGallery,
-    this.goToFromScratch,
-  });
+  const HomeMainView({super.key, this.goToFromPicture, this.goToFromScratch});
 
   @override
   Widget build(BuildContext context) {
@@ -62,47 +56,26 @@ class HomeMainView extends StatelessWidget {
   Widget buildCenteredButtons(double screenWidth) {
     return Column(
       children: [
-        buildTakePictureButton(screenWidth),
-        const SizedBox(height: 20.0),
-        buildImageFromGalleryButton(screenWidth),
+        buildFromPictureButton(screenWidth),
         const SizedBox(height: 20.0),
         buildFromScratchButton(screenWidth),
       ],
     );
   }
 
-  // Take picture button builder
-  Widget buildTakePictureButton(double screenWidth) {
+  // From picture button builder
+  Widget buildFromPictureButton(double screenWidth) {
     return SizedBox(
       width: screenWidth * 0.6,
       height: 50,
       child: ElevatedButton(
-        onPressed: goToTakeAPicture,
+        onPressed: goToFromPicture,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: const [
-            Text("Take a picture", style: TextStyle(fontSize: 20)),
+            Text("From picture", style: TextStyle(fontSize: 20)),
             SizedBox(width: 4.0),
             Icon(Icons.camera_alt, size: 20.0),
-          ],
-        ),
-      ),
-    );
-  }
-
-  // Image from gallery button builder
-  Widget buildImageFromGalleryButton(double screenWidth) {
-    return SizedBox(
-      width: screenWidth * 0.7,
-      height: 50,
-      child: ElevatedButton(
-        onPressed: goToImageFromGallery,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            Text("Image from gallery", style: TextStyle(fontSize: 20)),
-            SizedBox(width: 4.0),
-            Icon(Icons.image, size: 20.0),
           ],
         ),
       ),

@@ -2,9 +2,8 @@ import 'dart:io';
 
 import 'package:chess_snap/features/home/home_main_view.dart';
 import 'package:flutter/material.dart';
-import 'package:chess_snap/features/from_gallery/from_gallery_view.dart';
 import 'package:chess_snap/features/game/game_view.dart';
-import 'package:chess_snap/features/take_a_picture/take_a_pic_view.dart';
+import 'package:chess_snap/features/from_picture/take_a_pic_view.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -23,15 +22,9 @@ class _HomeViewState extends State<HomeView> {
         // Main home view with buttons
         Center(
           child: HomeMainView(
-            goToTakeAPicture: () {
+            goToFromPicture: () {
               setState(() {
-                overlayView = TakeAPicView(onExit: clearOverlay);
-              });
-            },
-
-            goToImageFromGallery: () {
-              setState(() {
-                overlayView = FromGalleryView(onExit: clearOverlay);
+                overlayView = FromPictureView(onExit: clearOverlay);
               });
             },
 

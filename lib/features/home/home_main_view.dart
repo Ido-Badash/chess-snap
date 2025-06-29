@@ -31,11 +31,11 @@ class HomeMainView extends StatelessWidget {
           const Text(
             "ChessScan & Play: Transform Your Game!",
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
           ),
           const SizedBox(height: 10.0),
           const Text(
-            "Capture any chessboard, anywhere, and play instantly!\n"
+            "Capture any chessboard, anywhere, and play!\n"
             "Revolutionize how you practice and enjoy chess!",
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 14),

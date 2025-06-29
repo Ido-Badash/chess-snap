@@ -3,7 +3,9 @@ import 'dart:io';
 import 'package:chess_snap/features/home/home_main_view.dart';
 import 'package:flutter/material.dart';
 import 'package:chess_snap/features/game/game_view.dart';
-import 'package:chess_snap/features/from_picture/take_a_pic_view.dart';
+import 'package:chess_snap/features/from_picture/from_picture_view.dart';
+
+enum HomeBody { main, fromPicture, fromScratch }
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -13,61 +15,62 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  Widget? overlayView; // Tracks the currently active overlay view
+  HomeBody currentBody = HomeBody.main;
+  String? gameFen;
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        // Main home view with buttons
-        Center(
-          child: HomeMainView(
-            goToFromPicture: () {
-              setState(() {
-                overlayView = FromPictureView(onExit: clearOverlay);
-              });
-            },
-
-            goToFromScratch: () => goToScrach(),
-          ),
-        ),
-        // Overlay view (if any)
-        if (overlayView != null)
-          Positioned.fill(
-            child: Container(
-              color: Colors.white, // Semi-transparent background
-              child: overlayView,
-            ),
-          ),
-      ],
-    );
+    return Scaffold(body: _buildCurrentBody());
   }
 
-  Future<void> goToScrach() async {
+  Widget _buildCurrentBody() {
+    switch (currentBody) {
+      case HomeBody.fromPicture:
+        return FromPictureView(
+          onExit: () {
+            setState(() {
+              currentBody = HomeBody.main;
+            });
+          },
+        );
+      case HomeBody.fromScratch:
+        return GameView(
+          fen: gameFen,
+          onExit: () {
+            setState(() {
+              currentBody = HomeBody.main;
+            });
+          },
+        );
+      case HomeBody.main:
+        // Default case for HomeMainView
+        return HomeMainView(
+          goToFromPicture: () {
+            setState(() {
+              currentBody = HomeBody.fromPicture;
+            });
+          },
+          goToFromScratch: () => goToScratch(),
+        );
+    }
+  }
+
+  Future<void> goToScratch() async {
     final String? lastFen = await getLastFenFromDB(
       "lib/features/game/game_history.txt",
     );
     setState(() {
-      overlayView = GameView(onExit: clearOverlay, fen: lastFen);
+      gameFen = lastFen;
+      currentBody = HomeBody.fromScratch;
     });
   }
 
   Future<String?> getLastFenFromDB(String path) async {
-    final File file = File(path);
-    List<String>? contents;
-
+    final file = File(path);
     if (await file.exists()) {
-      contents = await file.readAsLines();
+      final contents = await file.readAsLines();
       return contents.isNotEmpty ? contents.last : null;
-    } else {
-      return null;
     }
-  }
-
-  // Clears the overlay view and returns to the main home view
-  void clearOverlay() {
-    setState(() {
-      overlayView = null;
-    });
+    return null;
   }
 }

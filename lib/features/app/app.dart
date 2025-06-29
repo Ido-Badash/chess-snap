@@ -32,8 +32,8 @@ class _ChessSnapState extends State<ChessSnap> {
               });
             },
             style: ButtonStyle(
-              overlayColor: MaterialStateProperty.all(Colors.transparent),
-              textStyle: MaterialStateProperty.all(
+              overlayColor: WidgetStateProperty.all(Colors.transparent),
+              textStyle: WidgetStateProperty.all(
                 const TextStyle(fontSize: 24),
               ),
             ),
@@ -87,6 +87,7 @@ class _ChessSnapState extends State<ChessSnap> {
                   });
                 },
               ),
+            const SizedBox(height: 50), // Add some spacing
           ],
         );
       },

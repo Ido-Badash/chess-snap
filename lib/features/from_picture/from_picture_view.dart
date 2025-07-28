@@ -2,7 +2,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:chess_snap/core/api/chess_snap_api.dart';
-import 'package:chess_snap/features/game/game_view.dart';
 
 class FromPictureView extends StatefulWidget {
   final void Function()? onExit;
@@ -222,15 +221,10 @@ class _FromPictureViewState extends State<FromPictureView> {
 
       // Navigate to game with the detected FEN
       if (mounted) {
-        // Option 1: If using Navigator
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => GameView(fen: fen)),
+          MaterialPageRoute(builder: (context) => Text("Link to game: $fen")),
         );
-
-        // Option 2: If using the onExit callback to go back to HomeView
-        // You would need to modify this to pass the FEN back to HomeView
-        // widget.onExit?.call();
       }
     } on ChessSnapApiException catch (e) {
       setState(() {

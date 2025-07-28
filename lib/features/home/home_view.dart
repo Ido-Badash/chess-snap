@@ -2,10 +2,9 @@ import 'dart:io';
 
 import 'package:chess_snap/features/home/home_main_view.dart';
 import 'package:flutter/material.dart';
-import 'package:chess_snap/features/game/game_view.dart';
 import 'package:chess_snap/features/from_picture/from_picture_view.dart';
 
-enum HomeBody { main, fromPicture, fromScratch }
+enum HomeBody { main, fromPicture }
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -33,15 +32,6 @@ class _HomeViewState extends State<HomeView> {
             });
           },
         );
-      case HomeBody.fromScratch:
-        return GameView(
-          fen: gameFen,
-          onExit: () {
-            setState(() {
-              currentBody = HomeBody.main;
-            });
-          },
-        );
       case HomeBody.main:
         // Default case for HomeMainView
         return HomeMainView(
@@ -50,19 +40,8 @@ class _HomeViewState extends State<HomeView> {
               currentBody = HomeBody.fromPicture;
             });
           },
-          goToFromScratch: () => goToScratch(),
         );
     }
-  }
-
-  Future<void> goToScratch() async {
-    final String? lastFen = await getLastFenFromDB(
-      "lib/features/game/game_history.txt",
-    );
-    setState(() {
-      gameFen = lastFen;
-      currentBody = HomeBody.fromScratch;
-    });
   }
 
   Future<String?> getLastFenFromDB(String path) async {

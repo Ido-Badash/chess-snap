@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 
 class HomeMainView extends StatelessWidget {
   final void Function()? goToFromPicture;
-  final void Function()? goToFromScratch;
 
-  const HomeMainView({super.key, this.goToFromPicture, this.goToFromScratch});
+  const HomeMainView({super.key, this.goToFromPicture});
 
   @override
   Widget build(BuildContext context) {
@@ -57,8 +56,6 @@ class HomeMainView extends StatelessWidget {
     return Column(
       children: [
         buildFromPictureButton(screenWidth),
-        const SizedBox(height: 20.0),
-        buildFromScratchButton(screenWidth),
       ],
     );
   }
@@ -76,25 +73,6 @@ class HomeMainView extends StatelessWidget {
             Text("From picture", style: TextStyle(fontSize: 20)),
             SizedBox(width: 4.0),
             Icon(Icons.camera_alt, size: 20.0),
-          ],
-        ),
-      ),
-    );
-  }
-
-  // From scratch button builder
-  Widget buildFromScratchButton(double screenWidth) {
-    return SizedBox(
-      width: screenWidth * 0.7,
-      height: 50,
-      child: ElevatedButton(
-        onPressed: goToFromScratch,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            Text("From Scratch", style: TextStyle(fontSize: 20)),
-            SizedBox(width: 4.0),
-            Icon(Icons.edit, size: 20.0),
           ],
         ),
       ),

@@ -211,7 +211,7 @@ class _FromPictureViewState extends State<FromPictureView> {
       final bool isServerReachable = await ChessSnapApi.isServerReachable();
       if (!isServerReachable) {
         throw ChessSnapApiException(
-          'Cannot connect to the chess recognition server. Please make sure the Python server is running on localhost:5000',
+          "Cannot connect to the chess recognition server.",
         );
       }
 

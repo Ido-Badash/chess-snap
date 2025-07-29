@@ -40,7 +40,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
       duration: const Duration(milliseconds: 800),
       vsync: this,
     );
-    // Change this line to use a curve that doesn't go beyond 0.0-1.0 range
+    // change this line to use a curve that doesn't go beyond 0.0-1.0 range
     _resultSlideAnimation = Tween<double>(begin: 1.0, end: 0.0).animate(
       CurvedAnimation(parent: _resultController, curve: Curves.easeOut),
     );
@@ -192,7 +192,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
     );
   }
 
-  // Action methods
+  // action methods
   void _copyToClipboard(String text) {
     Clipboard.setData(ClipboardData(text: text));
     _showSnackBar("Copied to clipboard!", Icons.check);

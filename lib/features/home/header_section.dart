@@ -9,7 +9,7 @@ class HeaderSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // App logo/icon with floating animation
+        // app logo/icon with floating animation
         AnimatedBuilder(
           animation: floatingAnimation,
           builder: (context, child) {
@@ -40,7 +40,7 @@ class HeaderSection extends StatelessWidget {
         ),
         const SizedBox(height: 20),
 
-        // Title with gradient text effect
+        // title with gradient text effect
         ShaderMask(
           shaderCallback: (bounds) => const LinearGradient(
             colors: [Colors.white, Color(0xFFE8EAF6)],

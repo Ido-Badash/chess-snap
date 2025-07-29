@@ -65,7 +65,10 @@ class ChessSnapApi {
       };
 
       debugPrint('Sending request to: $baseUrl/get_fen');
-      debugPrint('Request body: ${jsonEncode(requestBody)}');
+      debugPrint('Image type: $imageType');
+      debugPrint('Image data length: ${imageInput.length}');
+      // Don't print the full base64 string as it's very long
+      debugPrint('Image data preview: ${imageInput.substring(0, 50)}...');
 
       final response = await http
           .post(
@@ -93,12 +96,9 @@ class ChessSnapApi {
           'API Error (${response.statusCode}): $errorMessage',
         );
       }
-    } on http.ClientException catch (e) {
-      throw ChessSnapApiException('Network error: $e');
-    } on FormatException catch (e) {
-      throw ChessSnapApiException('Invalid JSON response: $e');
     } catch (e) {
-      throw ChessSnapApiException('Unexpected error: $e');
+      debugPrint('Request failed: $e');
+      rethrow;
     }
   }
 

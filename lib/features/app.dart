@@ -1,6 +1,6 @@
 import "package:chess_snap/features/home/home_view.dart";
 import "package:chess_snap/features/settings/presentation/settings_view.dart";
-import 'package:chess_snap/features/about_n_help/about_n_help_view.dart';
+import 'package:chess_snap/features/about_n_help_view.dart';
 import "package:flutter/material.dart";
 
 class ChessSnap extends StatefulWidget {

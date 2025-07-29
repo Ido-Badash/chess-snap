@@ -18,6 +18,10 @@ dependencies:
   path_provider: ^2.1.5
   http: ^1.4.0
 
+  permission_handler: ^11.0.1 
+
+  url_launcher: ^6.3.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

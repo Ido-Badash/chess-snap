@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:chess_snap/features/home/home_main_view.dart';
 import 'package:flutter/material.dart';
-import 'package:chess_snap/features/from_picture/from_picture_view.dart';
+import 'package:chess_snap/features/from_picture_view.dart';
 
 enum HomeBody { main, fromPicture }
 

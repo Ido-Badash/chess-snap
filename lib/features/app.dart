@@ -16,29 +16,18 @@ class _ChessSnapState extends State<ChessSnap> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true, // Extend body behind the AppBar
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0, // Remove shadow for full transparency
         leading: IconButton(
+          color: (currentBody.runtimeType == HomeView)
+              ? Colors.white
+              : Colors.black,
           onPressed: () {
             showAppMenu(context); // Show menu as a modal
           },
           icon: const Icon(Icons.menu),
-        ),
-        title: Align(
-          alignment: Alignment.centerRight,
-          child: TextButton(
-            onPressed: () {
-              setState(() {
-                currentBody = const HomeView(); // Reset to HomeView
-              });
-            },
-            style: ButtonStyle(
-              overlayColor: WidgetStateProperty.all(Colors.transparent),
-              textStyle: WidgetStateProperty.all(
-                const TextStyle(fontSize: 24),
-              ),
-            ),
-            child: const Text("ChessSnap"),
-          ),
         ),
       ),
       body: currentBody, // Dynamically update the body

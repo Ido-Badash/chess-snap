@@ -57,7 +57,8 @@ class ImageService {
       if (androidInfo.version.sdkInt >= 33) {
         final status = await Permission.photos.request();
         debugPrint('Photos permission status: $status'); // debugPrint
-        return status.isGranted;
+        // Accept both granted and limited access
+        return status.isGranted || status.isLimited;
       }
       // Android 10-12 (API 29-32)
       else if (androidInfo.version.sdkInt >= 29) {
@@ -73,7 +74,8 @@ class ImageService {
     } else if (Platform.isIOS) {
       final status = await Permission.photos.request();
       debugPrint('iOS photos permission status: $status'); // debugPrint
-      return status.isGranted;
+      // Accept both granted and limited access for iOS too
+      return status.isGranted || status.isLimited;
     }
 
     return true; // for other platforms

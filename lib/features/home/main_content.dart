@@ -1,6 +1,8 @@
 import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:chess_snap/core/widgets/button.dart';
+import 'package:chess_snap/core/services/image_service.dart';
 
 class MainContent extends StatelessWidget {
   final String? selectedImagePath;
@@ -217,6 +219,21 @@ class MainContent extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 30),
+          
+          // Debug permission button (remove in production)
+          if (kDebugMode) ...[
+            ElevatedButton(
+              onPressed: () async {
+                await ImageService.checkPermissionStatus();
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.orange,
+                foregroundColor: Colors.white,
+              ),
+              child: const Text('Debug: Check Permissions'),
+            ),
+            const SizedBox(height: 20),
+          ],
         ],
 
         _buildGalleryButton(),

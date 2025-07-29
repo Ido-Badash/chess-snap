@@ -1,6 +1,5 @@
 import "package:chess_snap/features/home/home_view.dart";
-import "package:chess_snap/features/settings/presentation/settings_view.dart";
-import 'package:chess_snap/features/about_n_help_view.dart';
+import 'package:chess_snap/features/about_n_help/about_n_help_view.dart';
 import "package:flutter/material.dart";
 
 class ChessSnap extends StatefulWidget {
@@ -11,26 +10,26 @@ class ChessSnap extends StatefulWidget {
 }
 
 class _ChessSnapState extends State<ChessSnap> {
-  Widget currentBody = const HomeView(); // Default body is HomeView
+  Widget currentBody = const HomeView(); // default body
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true, // Extend body behind the AppBar
+      extendBodyBehindAppBar: true, // puts the body behind the AppBar
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        elevation: 0, // Remove shadow for full transparency
+        elevation: 0, // remove shadow for full transparency
         leading: IconButton(
           color: (currentBody.runtimeType == HomeView)
               ? Colors.white
               : Colors.black,
           onPressed: () {
-            showAppMenu(context); // Show menu as a modal
+            showAppMenu(context);
           },
           icon: const Icon(Icons.menu),
         ),
       ),
-      body: currentBody, // Dynamically update the body
+      body: currentBody, // update the body
     );
   }
 
@@ -52,18 +51,6 @@ class _ChessSnapState extends State<ChessSnap> {
                   });
                 },
               ),
-            if (currentBody.runtimeType != SettingsView)
-              buildMenuTile(
-                context,
-                icon: Icons.settings,
-                title: "Settings",
-                onTap: () {
-                  setState(() {
-                    currentBody =
-                        const SettingsView(); // Change body to SettingsView
-                  });
-                },
-              ),
             if (currentBody.runtimeType != AboutNHelpView)
               buildMenuTile(
                 context,
@@ -72,11 +59,11 @@ class _ChessSnapState extends State<ChessSnap> {
                 onTap: () {
                   setState(() {
                     currentBody =
-                        const AboutNHelpView(); // Change body to About & Help
+                        const AboutNHelpView(); // change body to About & Help
                   });
                 },
               ),
-            const SizedBox(height: 50), // Add some spacing
+            const SizedBox(height: 50), // add space
           ],
         );
       },
@@ -93,8 +80,8 @@ class _ChessSnapState extends State<ChessSnap> {
       leading: Icon(icon),
       title: Text(title),
       onTap: () {
-        Navigator.pop(context); // Close the menu
-        onTap(); // Update the body
+        Navigator.pop(context); // close the menu
+        onTap(); // update the body
       },
     );
   }

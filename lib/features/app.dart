@@ -1,5 +1,6 @@
 import "package:chess_snap/features/home/home_view.dart";
 import 'package:chess_snap/features/about_n_help/about_n_help_view.dart';
+import 'package:chess_snap/core/services/server_manager.dart';
 import "package:flutter/material.dart";
 
 class ChessSnap extends StatefulWidget {
@@ -9,8 +10,61 @@ class ChessSnap extends StatefulWidget {
   State<ChessSnap> createState() => _ChessSnapState();
 }
 
-class _ChessSnapState extends State<ChessSnap> {
+class _ChessSnapState extends State<ChessSnap> with WidgetsBindingObserver {
   Widget currentBody = const HomeView(); // default body
+
+  @override
+  void initState() {
+    super.initState();
+    // Add this widget as an observer for app lifecycle changes
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    // Clean up when the widget is disposed
+    WidgetsBinding.instance.removeObserver(this);
+    _stopServer();
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    
+    switch (state) {
+      case AppLifecycleState.detached:
+        // App is being terminated
+        debugPrint('App is being terminated, stopping server...');
+        _stopServer();
+        break;
+      case AppLifecycleState.paused:
+        // App is paused (minimized)
+        debugPrint('App paused');
+        break;
+      case AppLifecycleState.resumed:
+        // App is resumed
+        debugPrint('App resumed');
+        break;
+      case AppLifecycleState.inactive:
+        // App is inactive
+        debugPrint('App inactive');
+        break;
+      case AppLifecycleState.hidden:
+        // App is hidden
+        debugPrint('App hidden');
+        break;
+    }
+  }
+
+  void _stopServer() async {
+    try {
+      await ServerManager.stopServer();
+      debugPrint('Server stopped successfully');
+    } catch (e) {
+      debugPrint('Error stopping server: $e');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

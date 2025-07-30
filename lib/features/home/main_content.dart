@@ -2,8 +2,6 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:chess_snap/core/widgets/button.dart';
-import 'package:chess_snap/core/services/image_service.dart';
-import 'package:chess_snap/core/services/server_manager.dart';
 
 class MainContent extends StatelessWidget {
   final String? selectedImagePath;
@@ -220,12 +218,6 @@ class MainContent extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 30),
-          
-          // Debug section (only visible in debug mode)
-          if (kDebugMode) ...[
-            _buildDebugSection(),
-            const SizedBox(height: 20),
-          ],
         ],
 
         _buildGalleryButton(),
@@ -321,123 +313,6 @@ class MainContent extends StatelessWidget {
       height: 60,
       label: "Analyze Position",
       onPressed: onProcessImage,
-    );
-  }
-
-  Widget _buildDebugSection() {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.orange.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.orange.withValues(alpha: 0.3)),
-      ),
-      child: Column(
-        children: [
-          Row(
-            children: [
-              const Icon(Icons.developer_mode, color: Colors.orange, size: 20),
-              const SizedBox(width: 8),
-              Text(
-                "Debug Panel",
-                style: TextStyle(
-                  color: Colors.orange.shade100,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 12),
-          
-          // Permission check button
-          SizedBox(
-            width: double.infinity,
-            child: ElevatedButton.icon(
-              onPressed: () async {
-                await ImageService.checkPermissionStatus();
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blue,
-                foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(vertical: 12),
-              ),
-              icon: const Icon(Icons.security, size: 18),
-              label: const Text('Check Permissions'),
-            ),
-          ),
-          
-          const SizedBox(height: 8),
-          
-          // Server status and controls
-          Row(
-            children: [
-              Expanded(
-                child: ElevatedButton.icon(
-                  onPressed: () async {
-                    final success = await ServerManager.startServer();
-                    debugPrint('Server start result: $success');
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.green,
-                    foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(vertical: 8),
-                  ),
-                  icon: const Icon(Icons.play_arrow, size: 16),
-                  label: const Text('Start Server'),
-                ),
-              ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: ElevatedButton.icon(
-                  onPressed: () async {
-                    await ServerManager.stopServer();
-                    debugPrint('Server stopped');
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.red,
-                    foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(vertical: 8),
-                  ),
-                  icon: const Icon(Icons.stop, size: 16),
-                  label: const Text('Stop Server'),
-                ),
-              ),
-            ],
-          ),
-          
-          const SizedBox(height: 8),
-          
-          // Server status indicator
-          Row(
-            children: [
-              Icon(
-                ServerManager.isServerRunning ? Icons.circle : Icons.circle_outlined,
-                color: ServerManager.isServerRunning ? Colors.green : Colors.red,
-                size: 12,
-              ),
-              const SizedBox(width: 8),
-              Text(
-                'Server: ${ServerManager.isServerRunning ? "Running" : "Stopped"}',
-                style: TextStyle(
-                  color: Colors.white.withValues(alpha: 0.8),
-                  fontSize: 12,
-                ),
-              ),
-              if (ServerManager.serverPid != null) ...[
-                const SizedBox(width: 8),
-                Text(
-                  '(PID: ${ServerManager.serverPid})',
-                  style: TextStyle(
-                    color: Colors.white.withValues(alpha: 0.6),
-                    fontSize: 10,
-                  ),
-                ),
-              ],
-            ],
-          ),
-        ],
-      ),
     );
   }
 }

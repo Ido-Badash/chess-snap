@@ -1,12 +1,14 @@
-from inference_sdk import InferenceHTTPClient
-import cv2
 import json
+
+import cv2
+from inference_sdk import InferenceHTTPClient
 
 # Connect to Roboflow
 client = InferenceHTTPClient(
     api_url="https://serverless.roboflow.com",
-    api_key="WXL3JqIbXHe3onBW1kfQ"
+    api_key="ENTER PERSONAL API KEY HERE",  # todo
 )
+
 
 def get_chess_pieces(image_path, show=False):
     print(f"Processing image: {image_path}")
@@ -33,17 +35,27 @@ def get_chess_pieces(image_path, show=False):
 
             cv2.rectangle(image, (x1, y1), (x2, y2), (0, 255, 0), 2)
             label = f"{class_name} ({confidence:.2f})"
-            cv2.putText(image, label, (x1, y1 - 10),
-                        cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
+            cv2.putText(
+                image,
+                label,
+                (x1, y1 - 10),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                0.5,
+                (0, 255, 0),
+                2,
+            )
             bottom_center_x = x
             bottom_center_y = y + height / 2
-            cv2.circle(image, (int(bottom_center_x), int(bottom_center_y)), 5, (0, 0, 255), -1)
+            cv2.circle(
+                image, (int(bottom_center_x), int(bottom_center_y)), 5, (0, 0, 255), -1
+            )
 
         cv2.imshow("Bounding Boxes", image)
         cv2.waitKey(0)
         cv2.destroyAllWindows()
 
     return result
+
 
 if __name__ == "__main__":
     # Example usage

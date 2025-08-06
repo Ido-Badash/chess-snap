@@ -15,11 +15,27 @@ class ServerManager {
 
     try {
       debugPrint('Starting Python server...');
-
+      
       // Get the path to the server directory
-      final serverPath = Platform.isWindows
-          ? 'server\\start_server.bat'
-          : 'server/start_server.sh'; // For future cross-platform support
+      // Prefer virtual environment version if available
+      String serverPath;
+      if (Platform.isWindows) {
+        final venvPath = 'server\\start_server_venv.bat';
+        final regularPath = 'server\\start_server.bat';
+        
+        // Check if virtual environment script exists
+        final venvFile = File('${Directory.current.path}\\$venvPath');
+        if (await venvFile.exists()) {
+          serverPath = venvPath;
+          debugPrint('Using virtual environment server');
+        } else {
+          serverPath = regularPath;
+          debugPrint('Using regular server (no venv found)');
+        }
+      } else {
+        // For future Linux/Mac support
+        serverPath = 'server/start_server.sh';
+      }
 
       // Start the server process
       if (Platform.isWindows) {
@@ -37,9 +53,7 @@ class ServerManager {
           workingDirectory: Directory.current.path,
           mode: ProcessStartMode.detached,
         );
-      }
-
-      _isServerRunning = true;
+      }      _isServerRunning = true;
       debugPrint(
         'Server started successfully with PID: ${_serverProcess?.pid}',
       );

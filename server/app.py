@@ -39,6 +39,49 @@ def decode_base64_image(base64_string):
         raise ValueError(f"Invalid base64 image data: {str(e)}")
 
 
+@app.route("/health", methods=["GET"])
+def health():
+    """Health check endpoint"""
+    return (
+        jsonify({"status": "healthy", "message": "ChessSnap API Server is running"}),
+        200,
+    )
+
+
+@app.route("/detect", methods=["POST"])
+def detect_chess_position():
+    """
+    Detect chess position from uploaded image file
+    Expects multipart/form-data with 'image' file
+    """
+    try:
+        if "image" not in request.files:
+            return jsonify({"success": False, "error": "No image file provided"}), 400
+
+        file = request.files["image"]
+        if file.filename == "":
+            return jsonify({"success": False, "error": "No image file selected"}), 400
+
+        # Read the image file
+        image_data = file.read()
+
+        # Convert to PIL Image and then to numpy array
+        image = Image.open(io.BytesIO(image_data))
+        image_array = np.array(image)
+
+        # Convert RGB to BGR if needed (OpenCV uses BGR)
+        if len(image_array.shape) == 3 and image_array.shape[2] == 3:
+            image_array = image_array[:, :, ::-1]  # RGB to BGR
+
+        # Get FEN string from processed image
+        fen_string = pipeline.image_to_fen(image_array)
+
+        return jsonify({"success": True, "fen": fen_string}), 200
+
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+
 @app.route("/get_fen", methods=["POST"])
 def get_fen():
     try:
@@ -98,10 +141,10 @@ def get_fen():
         # Get FEN string from processed image
         fen_string = pipeline.image_to_fen(processed_image)
 
-        return jsonify({"fen": fen_string}), 200
+        return jsonify({"success": True, "fen": fen_string}), 200
 
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        return jsonify({"success": False, "error": str(e)}), 500
 
 
 if __name__ == "__main__":

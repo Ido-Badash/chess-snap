@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
@@ -152,9 +153,19 @@ class ServerManager {
           workingDirectory: serverDir,
         );
       }
+
+      // Listen to process output for debugging
+      if (kDebugMode) {
+        _serverProcess!.stdout.transform(utf8.decoder).listen((data) {
+          print('ServerManager stdout: $data');
+        });
+        _serverProcess!.stderr.transform(utf8.decoder).listen((data) {
+          print('ServerManager stderr: $data');
+        });
+      }
       
-      // Give the server time to start
-      await Future.delayed(const Duration(seconds: 3));
+      // Give the server more time to start
+      await Future.delayed(const Duration(seconds: 8));
       
       // Check if server started successfully
       if (await _checkServerHealth()) {

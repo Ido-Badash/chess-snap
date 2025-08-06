@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'dart:async';
 import 'package:http/http.dart' as http;
 import 'package:flutter/foundation.dart';
-import 'package:chess_snap/core/services/server_manager.dart';
 
 class ChessSnapApiException implements Exception {
   final String message;
@@ -12,26 +11,21 @@ class ChessSnapApiException implements Exception {
   ChessSnapApiException(this.message, {this.statusCode});
 
   @override
-  String toString() => 'ChessSnapApiException: $message${statusCode != null ? ' (Status: $statusCode)' : ''}';
+  String toString() =>
+      'ChessSnapApiException: $message${statusCode != null ? ' (Status: $statusCode)' : ''}';
 }
 
 class ChessSnapApi {
   static const Duration _timeout = Duration(seconds: 30);
 
-  static Future<bool> isServerReachable() async {
-    if (!ServerManager.canRunLocalServer) {
-      // On mobile platforms, we use demo mode, so always return false for server check
-      return false;
-    }
-
-    final url = ServerManager.serverUrl;
-    if (url == null) return false;
+  static Future<bool> isServerReachable(String url) async {
+    if (url.isEmpty) return false;
 
     try {
-      final response = await http.get(
-        Uri.parse('$url/health'),
-      ).timeout(_timeout);
-      
+      final response = await http
+          .get(Uri.parse('$url/health'))
+          .timeout(_timeout);
+
       return response.statusCode == 200;
     } catch (e) {
       if (kDebugMode) {
@@ -41,31 +35,37 @@ class ChessSnapApi {
     }
   }
 
-  static Future<String> getFenFromFile(File imageFile) async {
-    // Check if we can use the local server
-    if (ServerManager.canRunLocalServer && ServerManager.serverUrl != null) {
-      return await _getFenFromLocalServer(imageFile);
+  static Future<String> getFenFromFile(
+    File imageFile, {
+    String? serverUrl,
+  }) async {
+    if (serverUrl != null && serverUrl.isNotEmpty) {
+      return await _getFenFromLocalServer(imageFile, serverUrl);
     } else {
-      // Use demo mode for mobile platforms
+      // Use demo mode if no server URL is provided
       return _getDemoFen();
     }
   }
 
-  static Future<String> _getFenFromLocalServer(File imageFile) async {
-    final url = ServerManager.serverUrl;
-    if (url == null) {
+  static Future<String> _getFenFromLocalServer(
+    File imageFile,
+    String url,
+  ) async {
+    if (url.isEmpty) {
       throw ChessSnapApiException('Server URL is not available');
     }
 
     try {
       // Check if server is reachable first
-      if (!await isServerReachable()) {
-        throw ChessSnapApiException('Server is not reachable. Please make sure the Python server is running.');
+      if (!await isServerReachable(url)) {
+        throw ChessSnapApiException(
+          'Server is not reachable. Please make sure the Python server is running.',
+        );
       }
 
       final uri = Uri.parse('$url/detect');
       final request = http.MultipartRequest('POST', uri);
-      
+
       // Add the image file
       request.files.add(
         await http.MultipartFile.fromPath('image', imageFile.path),
@@ -85,7 +85,7 @@ class ChessSnapApi {
 
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
-        
+
         if (data['success'] == true) {
           final fen = data['fen'] as String?;
           if (fen != null && fen.isNotEmpty) {
@@ -104,7 +104,9 @@ class ChessSnapApi {
         );
       }
     } on TimeoutException {
-      throw ChessSnapApiException('Request timeout - server took too long to respond');
+      throw ChessSnapApiException(
+        'Request timeout - server took too long to respond',
+      );
     } catch (e) {
       if (e is ChessSnapApiException) {
         rethrow;
@@ -122,23 +124,27 @@ class ChessSnapApi {
       'r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 4 3', // Scotch opening
       'rnbqkb1r/ppp2ppp/4pn2/3p4/2PP4/8/PP2PPPP/RNBQKBNR w KQkq d6 0 4', // Queen's Gambit Declined
     ];
-    
+
     // Return a random position from demo positions
-    final randomIndex = DateTime.now().millisecondsSinceEpoch % demoPositions.length;
+    final randomIndex =
+        DateTime.now().millisecondsSinceEpoch % demoPositions.length;
     final selectedFen = demoPositions[randomIndex];
-    
+
     if (kDebugMode) {
       print('ChessSnapApi: Using demo FEN (mobile mode): $selectedFen');
     }
-    
+
     return selectedFen;
   }
 
-  static Future<String> getFenFromPath(String imagePath) async {
+  static Future<String> getFenFromPath(
+    String imagePath, {
+    String? serverUrl,
+  }) async {
     final file = File(imagePath);
     if (!file.existsSync()) {
       throw ChessSnapApiException('Image file does not exist: $imagePath');
     }
-    return await getFenFromFile(file);
+    return await getFenFromFile(file, serverUrl: serverUrl);
   }
 }

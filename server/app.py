@@ -10,7 +10,7 @@ pipeline = RecognitionPipeline()
 app = Flask(__name__)
 
 
-def decode_base64_image(base64_string):
+def decode_base64_image(base64_string: str) -> np.ndarray:
     """
     Decode a base64 string to an image
     Supports both with and without data URL prefix (data:image/jpeg;base64,...)

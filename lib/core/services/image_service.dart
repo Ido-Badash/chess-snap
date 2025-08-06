@@ -109,7 +109,7 @@ class ImageService {
 
   static Future<String> processImageToFen(String imagePath) async {
     // check if server is reachable first
-    final bool isServerReachable = await ChessSnapApi.isServerReachable();
+    final bool isServerReachable = await ChessSnapApi.isServerReachable("get_fen");
     if (!isServerReachable) {
       throw ChessSnapApiException(
         "Cannot connect to the chess recognition server. Make sure the Python server is running.",

@@ -1,6 +1,5 @@
 import "package:chess_snap/features/home/home_view.dart";
 import 'package:chess_snap/features/about_n_help/about_n_help_view.dart';
-import 'package:chess_snap/core/services/server_manager.dart';
 import "package:flutter/material.dart";
 
 class ChessSnap extends StatefulWidget {
@@ -31,7 +30,7 @@ class _ChessSnapState extends State<ChessSnap> with WidgetsBindingObserver {
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     super.didChangeAppLifecycleState(state);
-    
+
     switch (state) {
       case AppLifecycleState.detached:
         // App is being terminated
@@ -57,14 +56,7 @@ class _ChessSnapState extends State<ChessSnap> with WidgetsBindingObserver {
     }
   }
 
-  void _stopServer() async {
-    try {
-      await ServerManager.stopServer();
-      debugPrint('Server stopped successfully');
-    } catch (e) {
-      debugPrint('Error stopping server: $e');
-    }
-  }
+  void _stopServer() async {}
 
   @override
   Widget build(BuildContext context) {

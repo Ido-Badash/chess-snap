@@ -1,9 +1,20 @@
 import 'package:flutter/material.dart';
 import 'features/app.dart';
+import 'core/services/server_manager.dart';
 
 void main() async {
-  // ensure Flutter is initialized
+  // Ensure Flutter is initialized
   WidgetsFlutterBinding.ensureInitialized();
+  
+  // Start the Python API server
+  debugPrint('Starting ChessSnap application...');
+  final serverStarted = await ServerManager.startServer();
+  
+  if (serverStarted) {
+    debugPrint('Python server started successfully');
+  } else {
+    debugPrint('Failed to start Python server - app will continue without backend');
+  }
 
   // Run the Flutter app
   runApp(const MyApp());

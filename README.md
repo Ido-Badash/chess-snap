@@ -10,7 +10,7 @@ ChessSnap is a cross-platform Flutter application that lets you convert a real c
   Snap a photo of a chessboard and the app recreates the position digitally (requires a backend server for image analysis).
 - **Play from Any Position**  
   Start playing from any scanned board position, solo or with another player.
-  [with lichess](https://lichess.com).
+  [with lichess](https://lichess.org).
 
 ---
 

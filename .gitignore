@@ -48,5 +48,5 @@ app.*.map.json
 /server/venv
 /server/.venv
 
-# roboflow
-/server/chess_positions/roboflow_detection
+# chess detection lib
+/server/chess_positions

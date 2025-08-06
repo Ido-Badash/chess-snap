@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\idoba\chess_snap\build\windows\x64\_deps\nuget-subbuild\CMakeFiles\d90011cdf5a832509f2d994ec0d505c2\nuget-populate-mkdir.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\idoba\chess_snap\build\windows\x64\_deps\nuget-subbuild\CMakeFiles\d90011cdf5a832509f2d994ec0d505c2\nuget-populate-download.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\idoba\chess_snap\build\windows\x64\_deps\nuget-subbuild\CMakeFiles\d90011cdf5a832509f2d994ec0d505c2\nuget-populate-update.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\idoba\chess_snap\build\windows\x64\_deps\nuget-subbuild\CMakeFiles\d90011cdf5a832509f2d994ec0d505c2\nuget-populate-patch.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\idoba\chess_snap\build\windows\x64\_deps\nuget-subbuild\CMakeFiles\d90011cdf5a832509f2d994ec0d505c2\nuget-populate-copyfile.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\idoba\chess_snap\build\windows\x64\_deps\nuget-subbuild\CMakeFiles\d90011cdf5a832509f2d994ec0d505c2\nuget-populate-configure.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\idoba\chess_snap\build\windows\x64\_deps\nuget-subbuild\CMakeFiles\d90011cdf5a832509f2d994ec0d505c2\nuget-populate-build.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\idoba\chess_snap\build\windows\x64\_deps\nuget-subbuild\CMakeFiles\d90011cdf5a832509f2d994ec0d505c2\nuget-populate-install.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\idoba\chess_snap\build\windows\x64\_deps\nuget-subbuild\CMakeFiles\d90011cdf5a832509f2d994ec0d505c2\nuget-populate-test.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\idoba\chess_snap\build\windows\x64\_deps\nuget-subbuild\CMakeFiles\38c217d4f10649b9e21ee1b4cf3e8da5\nuget-populate-complete.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\idoba\chess_snap\build\windows\x64\_deps\nuget-subbuild\CMakeFiles\62f9bf784a9d086b93c8de1a3d00ad76\nuget-populate.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\idoba\chess_snap\build\windows\x64\_deps\nuget-subbuild\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\idoba\chess_snap\build\windows\x64\_deps\nuget-subbuild\CMakeFiles\nuget-populate" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{077939C3-3998-3E40-B307-AF18940EFDAA}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,15 @@
+# Target labels
+ nuget-populate
+# Source files and their labels
+C:/Users/idoba/chess_snap/build/windows/x64/_deps/nuget-subbuild/CMakeFiles/nuget-populate
+C:/Users/idoba/chess_snap/build/windows/x64/_deps/nuget-subbuild/CMakeFiles/62f9bf784a9d086b93c8de1a3d00ad76/nuget-populate.rule
+C:/Users/idoba/chess_snap/build/windows/x64/_deps/nuget-subbuild/CMakeFiles/38c217d4f10649b9e21ee1b4cf3e8da5/nuget-populate-complete.rule
+C:/Users/idoba/chess_snap/build/windows/x64/_deps/nuget-subbuild/CMakeFiles/d90011cdf5a832509f2d994ec0d505c2/nuget-populate-build.rule
+C:/Users/idoba/chess_snap/build/windows/x64/_deps/nuget-subbuild/CMakeFiles/d90011cdf5a832509f2d994ec0d505c2/nuget-populate-configure.rule
+C:/Users/idoba/chess_snap/build/windows/x64/_deps/nuget-subbuild/CMakeFiles/d90011cdf5a832509f2d994ec0d505c2/nuget-populate-copyfile.rule
+C:/Users/idoba/chess_snap/build/windows/x64/_deps/nuget-subbuild/CMakeFiles/d90011cdf5a832509f2d994ec0d505c2/nuget-populate-download.rule
+C:/Users/idoba/chess_snap/build/windows/x64/_deps/nuget-subbuild/CMakeFiles/d90011cdf5a832509f2d994ec0d505c2/nuget-populate-install.rule
+C:/Users/idoba/chess_snap/build/windows/x64/_deps/nuget-subbuild/CMakeFiles/d90011cdf5a832509f2d994ec0d505c2/nuget-populate-mkdir.rule
+C:/Users/idoba/chess_snap/build/windows/x64/_deps/nuget-subbuild/CMakeFiles/d90011cdf5a832509f2d994ec0d505c2/nuget-populate-patch.rule
+C:/Users/idoba/chess_snap/build/windows/x64/_deps/nuget-subbuild/CMakeFiles/d90011cdf5a832509f2d994ec0d505c2/nuget-populate-test.rule
+C:/Users/idoba/chess_snap/build/windows/x64/_deps/nuget-subbuild/CMakeFiles/d90011cdf5a832509f2d994ec0d505c2/nuget-populate-update.rule

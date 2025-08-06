@@ -1,0 +1,28 @@
+^C:\USERS\IDOBA\CHESS_SNAP\BUILD\WINDOWS\X64\CMAKEFILES\00D768566F2DD5BB0554EBF4AAED1CC3\FLUTTER_WINDOWS.DLL.RULE
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E env FLUTTER_ROOT=C:\Users\idoba\AppData\Local\flutter PROJECT_DIR=C:\Users\idoba\chess_snap FLUTTER_ROOT=C:\Users\idoba\AppData\Local\flutter FLUTTER_EPHEMERAL_DIR=C:\Users\idoba\chess_snap\windows\flutter\ephemeral PROJECT_DIR=C:\Users\idoba\chess_snap FLUTTER_TARGET=C:\Users\idoba\chess_snap\lib\main.dart DART_DEFINES=RkxVVFRFUl9WRVJTSU9OPTMuMzIuNA==,RkxVVFRFUl9DSEFOTkVMPXN0YWJsZQ==,RkxVVFRFUl9HSVRfVVJMPWh0dHBzOi8vZ2l0aHViLmNvbS9mbHV0dGVyL2ZsdXR0ZXIuZ2l0,RkxVVFRFUl9GUkFNRVdPUktfUkVWSVNJT049NmZiYTI0NDdlOQ==,RkxVVFRFUl9FTkdJTkVfUkVWSVNJT049OGNkMTllNTA5ZA==,RkxVVFRFUl9EQVJUX1ZFUlNJT049My44LjE= DART_OBFUSCATION=false TRACK_WIDGET_CREATION=true TREE_SHAKE_ICONS=false PACKAGE_CONFIG=C:\Users\idoba\chess_snap\.dart_tool\package_config.json C:/Users/idoba/AppData/Local/flutter/packages/flutter_tools/bin/tool_backend.bat windows-x64 Debug
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\IDOBA\CHESS_SNAP\BUILD\WINDOWS\X64\CMAKEFILES\EC22F3CAF982D96212E9E8A09E3D0D11\FLUTTER_ASSEMBLE.RULE
+setlocal
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\IDOBA\CHESS_SNAP\WINDOWS\FLUTTER\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Users/idoba/chess_snap/windows -BC:/Users/idoba/chess_snap/build/windows/x64 --check-stamp-file C:/Users/idoba/chess_snap/build/windows/x64/flutter/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

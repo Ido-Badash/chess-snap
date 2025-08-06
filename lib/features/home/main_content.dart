@@ -220,7 +220,7 @@ class MainContent extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
         ],
-
+        const SizedBox(height: 30),
         _buildGalleryButton(),
         const SizedBox(height: 20),
         _buildCameraButton(),

@@ -1,0 +1,10 @@
+^C:\USERS\IDOBA\CHESS_SNAP\BUILD\WINDOWS\X64\CMAKEFILES\E3044FCAABBD38E05327EB41DCDE3AEA\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Users/idoba/chess_snap/windows -BC:/Users/idoba/chess_snap/build/windows/x64 --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/idoba/chess_snap/build/windows/x64/chess_snap.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

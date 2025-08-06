@@ -17,8 +17,9 @@ class ChessSnapApiException implements Exception {
 
 class ChessSnapApi {
   static const Duration _timeout = Duration(seconds: 30);
+  static String url = 'http://localhost:5000';
 
-  static Future<bool> isServerReachable(String url) async {
+  static Future<bool> isServerReachable() async {
     if (url.isEmpty) return false;
 
     try {
@@ -39,12 +40,11 @@ class ChessSnapApi {
     File imageFile, {
     String? serverUrl,
   }) async {
-    if (serverUrl != null && serverUrl.isNotEmpty) {
-      return await _getFenFromLocalServer(imageFile, serverUrl);
-    } else {
-      // Use demo mode if no server URL is provided
-      return _getDemoFen();
+    final apiUrl = serverUrl ?? url;
+    if (apiUrl.isEmpty) {
+      throw ChessSnapApiException('Server URL is not available');
     }
+    return await _getFenFromLocalServer(imageFile, apiUrl);
   }
 
   static Future<String> _getFenFromLocalServer(
@@ -57,7 +57,7 @@ class ChessSnapApi {
 
     try {
       // Check if server is reachable first
-      if (!await isServerReachable(url)) {
+      if (!await isServerReachable()) {
         throw ChessSnapApiException(
           'Server is not reachable. Please make sure the Python server is running.',
         );
@@ -113,28 +113,6 @@ class ChessSnapApi {
       }
       throw ChessSnapApiException('Network error: $e');
     }
-  }
-
-  static String _getDemoFen() {
-    // Demo FEN positions for mobile platforms
-    final demoPositions = [
-      'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1', // Starting position
-      'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1', // 1.e4
-      'rnbqkb1r/pppp1ppp/5n2/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 2 2', // 1.e4 e5 2.Nf3
-      'r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 4 3', // Scotch opening
-      'rnbqkb1r/ppp2ppp/4pn2/3p4/2PP4/8/PP2PPPP/RNBQKBNR w KQkq d6 0 4', // Queen's Gambit Declined
-    ];
-
-    // Return a random position from demo positions
-    final randomIndex =
-        DateTime.now().millisecondsSinceEpoch % demoPositions.length;
-    final selectedFen = demoPositions[randomIndex];
-
-    if (kDebugMode) {
-      print('ChessSnapApi: Using demo FEN (mobile mode): $selectedFen');
-    }
-
-    return selectedFen;
   }
 
   static Future<String> getFenFromPath(

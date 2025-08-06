@@ -1,0 +1,1 @@
+ C:\\Users\\idoba\\chess_snap\\.dart_tool\\flutter_build\\852537e3ecdaad7885e1a4f2a3f277f5\\native_assets.json: 

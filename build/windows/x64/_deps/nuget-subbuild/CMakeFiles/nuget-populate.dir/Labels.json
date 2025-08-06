@@ -1,0 +1,49 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "C:/Users/idoba/chess_snap/build/windows/x64/_deps/nuget-subbuild/CMakeFiles/nuget-populate"
+		},
+		{
+			"file" : "C:/Users/idoba/chess_snap/build/windows/x64/_deps/nuget-subbuild/CMakeFiles/62f9bf784a9d086b93c8de1a3d00ad76/nuget-populate.rule"
+		},
+		{
+			"file" : "C:/Users/idoba/chess_snap/build/windows/x64/_deps/nuget-subbuild/CMakeFiles/38c217d4f10649b9e21ee1b4cf3e8da5/nuget-populate-complete.rule"
+		},
+		{
+			"file" : "C:/Users/idoba/chess_snap/build/windows/x64/_deps/nuget-subbuild/CMakeFiles/d90011cdf5a832509f2d994ec0d505c2/nuget-populate-build.rule"
+		},
+		{
+			"file" : "C:/Users/idoba/chess_snap/build/windows/x64/_deps/nuget-subbuild/CMakeFiles/d90011cdf5a832509f2d994ec0d505c2/nuget-populate-configure.rule"
+		},
+		{
+			"file" : "C:/Users/idoba/chess_snap/build/windows/x64/_deps/nuget-subbuild/CMakeFiles/d90011cdf5a832509f2d994ec0d505c2/nuget-populate-copyfile.rule"
+		},
+		{
+			"file" : "C:/Users/idoba/chess_snap/build/windows/x64/_deps/nuget-subbuild/CMakeFiles/d90011cdf5a832509f2d994ec0d505c2/nuget-populate-download.rule"
+		},
+		{
+			"file" : "C:/Users/idoba/chess_snap/build/windows/x64/_deps/nuget-subbuild/CMakeFiles/d90011cdf5a832509f2d994ec0d505c2/nuget-populate-install.rule"
+		},
+		{
+			"file" : "C:/Users/idoba/chess_snap/build/windows/x64/_deps/nuget-subbuild/CMakeFiles/d90011cdf5a832509f2d994ec0d505c2/nuget-populate-mkdir.rule"
+		},
+		{
+			"file" : "C:/Users/idoba/chess_snap/build/windows/x64/_deps/nuget-subbuild/CMakeFiles/d90011cdf5a832509f2d994ec0d505c2/nuget-populate-patch.rule"
+		},
+		{
+			"file" : "C:/Users/idoba/chess_snap/build/windows/x64/_deps/nuget-subbuild/CMakeFiles/d90011cdf5a832509f2d994ec0d505c2/nuget-populate-test.rule"
+		},
+		{
+			"file" : "C:/Users/idoba/chess_snap/build/windows/x64/_deps/nuget-subbuild/CMakeFiles/d90011cdf5a832509f2d994ec0d505c2/nuget-populate-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"nuget-populate"
+		],
+		"name" : "nuget-populate"
+	}
+}

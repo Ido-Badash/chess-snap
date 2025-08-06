@@ -2,9 +2,10 @@ import base64
 import io
 
 import numpy as np
-from chess_positions import RecognitionPipeline
 from flask import Flask, jsonify, request
 from PIL import Image
+
+from chess_positions import RecognitionPipeline
 
 pipeline = RecognitionPipeline()
 app = Flask(__name__)

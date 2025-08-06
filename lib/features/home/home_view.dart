@@ -244,9 +244,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
     });
 
     try {
-      final bool isServerReachable = await ChessSnapApi.isServerReachable(
-        "get_fen",
-      );
+      final bool isServerReachable = await ChessSnapApi.isServerReachable();
       if (!isServerReachable) {
         debugPrint("Server is not reachable");
         throw ChessSnapApiException(
